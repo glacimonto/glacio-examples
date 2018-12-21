@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.github.fridujo.glacio.examples.persistence.ContactInfo;
 import com.github.fridujo.glacio.examples.persistence.ContactRepository;
 
-@SpringBootTest(classes = ApplicationBootstrap.class, properties="spring.main.banner-mode=off")
+@SpringBootTest(classes = ApplicationBootstrap.class, properties = "spring.main.banner-mode=off")
 @AutoConfigureMockMvc
 class ApplicationIntegrationTest {
 
@@ -49,7 +49,7 @@ class ApplicationIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(toJson(contactToInsert)))
             .andDo(mvcResult -> generatedId.set(mvcResult.getResponse().getContentAsString()))
-            .andExpect(status().isOk());
+            .andExpect(status().isCreated());
 
         mockMvc.perform(get("/api/contact/jo*"))
             .andExpect(status().isOk())
